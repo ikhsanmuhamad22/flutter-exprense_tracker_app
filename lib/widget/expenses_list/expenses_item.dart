@@ -20,9 +20,9 @@ class ExpensesItem extends StatelessWidget {
                 Spacer(),
                 Row(
                   children: [
-                    Icon(Icons.alarm),
+                    Icon(categoryIcons[expense.category]),
                     SizedBox(width: 8),
-                    Text(expense.date.toString())
+                    Text(expense.formatterDate)
                   ],
                 )
               ],
