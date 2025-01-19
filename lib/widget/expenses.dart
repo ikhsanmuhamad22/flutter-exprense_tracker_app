@@ -13,8 +13,6 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesStete extends State<Expenses> {
-  @override
-  Widget build(BuildContext context) {
     List<Expense> registerExpense = [
       Expense(
           title: 'jeans',
@@ -28,13 +26,23 @@ class _ExpensesStete extends State<Expenses> {
           category: Category.leasure),
     ];
 
+  void addExpense(Expense expense) {
+    setState(() {
+      registerExpense.add(expense);
+    });
+  }
     void openModalBottomOverlayer() {
       showModalBottomSheet(
-        context: context,
-        builder: (ctx) => NewExpense(),
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewExpense(
+        onAddExpense: addExpense,
+      ),
       );
     }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Expenses TrackerApp'),
@@ -47,7 +55,6 @@ class _ExpensesStete extends State<Expenses> {
       ),
       body: Column(
         children: [
-          Text('aku ingin jadi kaya'),
           Expanded(
             child: ExpensesList(expenses: registerExpense),
           )
